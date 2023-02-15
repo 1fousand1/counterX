@@ -1,38 +1,142 @@
+html, body {
+  height: 100%;
+  background-color: #2A2C36;
+}
+
 .App {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:space-around;
   text-align: center;
+  align-items: center;
+  height: 100vh;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Settings {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  height: 450px;
+  width: 650px;
+  border: 5px solid #3ED5F6;
+  border-radius: 10px;
+
 }
 
-.App-link {
-  color: #61dafb;
+.Counter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 450px;
+  width: 650px;
+  border: 5px solid #3ED5F6;
+  border-radius: 10px;
+
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/*--------------------------*/
+
+
+.Settings-display{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  height: 200px;
+  border: 3px solid #3ED5F6;
+  border-radius: 10px;
+  margin: 0px 20px 20px 20px;
+
 }
+
+.Settings-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  height: 140px;
+  border: 3px solid #3ED5F6;
+  border-radius: 10px;
+  margin: 10px 20px 0px 20px;
+}
+
+.Counter-display{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items:center;
+  height: 200px;
+  border: 3px solid #3ED5F6;
+  border-radius: 10px;
+  margin: 0px 20px 20px 20px;
+
+}
+
+.Counter-btns{
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+  align-items:center;
+  height: 140px;
+  border: 3px solid #3ED5F6;
+  border-radius: 10px;
+  margin: 10px 20px 0px 20px;
+}
+
+
+.Settings-display{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: inherit;
+}
+
+.Settings-display input{
+  border-radius: 5px;
+  border-color: #3ED5F6;
+  width:250px;
+  font-size: 50px;
+  text-align: center;
+
+}
+.Settings-display input:focus{
+  width:250px;
+  font-size: 50px;
+  text-align: center;
+  border: 4px solid #0066ff;
+  outline: #0066ff;
+
+}
+
+.Settings-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: inherit;
+  align-items: center;
+  color:#3ED5F6;
+}
+
+.Settings-title-error{
+  display: flex;
+  flex-direction: row;
+  justify-content: inherit;
+  align-items: center;
+  color:#3ED5F6;
+}
+
+.Settings-title-error input{
+  background-color: #F09CAB;
+  border-color: red;
+  border-radius: 2px;
+}
+
+.Settings-title-error input:focus{
+  outline: none;
+  background-color: #F09CAB;
+  border-color: red;
+  border-radius: 2px;
+}
+
