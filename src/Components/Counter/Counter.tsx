@@ -5,11 +5,12 @@ import SuperButton from "../SuperButton/SuperButton";
 type CounterPropsType={
     count: number
     setCount:Dispatch<SetStateAction<number>>
-    setError: Dispatch<SetStateAction<boolean>>
-    error:boolean
+    setStartError: Dispatch<SetStateAction<boolean>>
+    startError:boolean
     maxValue: number
     startValue:number
     isSet:boolean
+    maxError:boolean
 }
 
 
@@ -26,15 +27,15 @@ const Counter:FC<CounterPropsType> = (props) => {
 
     }
 
-    const disabledInc = props.maxValue === props.count || props.error ? true : (props.isSet ? false : true)
-    const disabledRes = props.error ? true : (props.isSet ? false : true)
+    const disabledInc = props.maxValue === props.count || (props.maxError || props.startError) ? true : (props.isSet ? false : true)
+    const disabledRes = (props.maxError || props.startError) ? true : (props.isSet ? false : true)
     const displayClass = props.count === props.maxValue ? 'Counter-display-red' : 'Counter-Display-Value'
 
 
     return (
         <div className={'Counter'}>
             <div className={'Counter-display'}>
-                {props.error ? <h1 className={"Error"}>Incorrect value!</h1> :
+                {(props.maxError || props.startError) ? <h1 className={"Error"}> Incorrect value!</h1> :
                     (props.isSet ? <Display count={props.count} className={displayClass}/> : <h1 className={'Counter-display-prompt'}>enter values and press "set"</h1>)}
             </div>
             <div className={"Counter-btns"}>

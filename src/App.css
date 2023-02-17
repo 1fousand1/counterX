@@ -96,23 +96,6 @@ html, body {
   align-items: inherit;
 }
 
-.Settings-display input{
-  border-radius: 5px;
-  border-color: #3ED5F6;
-  width:120px;
-  font-size: 35px;
-  text-align: center;
-
-}
-.Settings-display input:focus{
-  width:120px;
-  font-size: 35px;
-  text-align: center;
-  border: 4px solid #0066ff;
-  outline: #0066ff;
-
-}
-
 .Settings-title{
   display: flex;
   flex-direction: row;
@@ -121,24 +104,70 @@ html, body {
   color:#3ED5F6;
 }
 
-.Settings-title-error{
-  display: flex;
-  flex-direction: row;
-  justify-content: inherit;
-  align-items: center;
-  color:#3ED5F6;
+.inputMaxValue{
+  border-radius: 5px;
+  border-color: #3ED5F6;
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+
+}
+.inputMaxValue{
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+  border: 4px solid #0066ff;
+  outline: #0066ff;
+
+}
+.inputStartValue{
+  border-radius: 5px;
+  border-color: #3ED5F6;
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+
+}
+.inputStartValue{
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+  border: 4px solid #0066ff;
+  outline: #0066ff;
 }
 
-.Settings-title-error input{
-  background-color: #F09CAB;
-  border-color: red;
-  border-radius: 2px;
+
+.inputMaxValue-error{
+  border-radius: 5px;
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+  border: 4px solid red;
+  outline: red;
+  background-color: lightcoral;
 }
 
-.Settings-title-error input:focus{
+.inputMaxValue-error:focus {
+  border-radius: 5px;
   outline: none;
-  background-color: #F09CAB;
   border-color: red;
-  border-radius: 2px;
 }
+
+.inputStartValue-error{
+  border-radius: 5px;
+  width:140px;
+  font-size: 35px;
+  text-align: center;
+  border: 4px solid red;
+  outline: red;
+  background-color: lightcoral;
+}
+
+.inputStartValue-error:focus {
+  border-radius: 5px;
+  outline: none;
+  border-color: red;
+}
+
+
 

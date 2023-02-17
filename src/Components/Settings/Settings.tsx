@@ -1,4 +1,4 @@
-import React, {ChangeEvent, Dispatch, FC, SetStateAction, useState} from 'react';
+import React, {ChangeEvent, Dispatch, FC, SetStateAction, useEffect, useState} from 'react';
 import SuperButton from "../SuperButton/SuperButton";
 import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
@@ -9,27 +9,40 @@ type SettingsPropsType={
     maxValue:number
     setStartValue: Dispatch<SetStateAction<number>>
     setMaxValue: Dispatch<SetStateAction<number>>
-    setError:Dispatch<SetStateAction<boolean>>
+    setStartError:Dispatch<SetStateAction<boolean>>
     setCount:Dispatch<SetStateAction<number>>
     count: number
     setIsSet:Dispatch<SetStateAction<boolean>>
-    error:boolean
+    startError:boolean
+    setMaxError:Dispatch<SetStateAction<boolean>>
+    maxError:boolean
 
 }
 
 const Settings:FC<SettingsPropsType> = (props) => {
     const [isEdited, setIsEdited] = useState(false);
 
-    const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(e.currentTarget.value);
 
-        if (value < 0) {
-            props.setError(true);
-        } else if (value >= props.maxValue) {
-            props.setError(true);
+    useEffect(() => {
+        const savedStartValue = localStorage.getItem('startValue');
+        const savedMaxValue = localStorage.getItem('maxValue');
+        if (savedStartValue && savedMaxValue) {
+            props.setStartValue(parseInt(savedStartValue));
+            props.setMaxValue(parseInt(savedMaxValue));
+        }
+    }, []);
+
+
+    const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
+        const startValue = parseInt(e.currentTarget.value);
+
+        if (startValue < 0) {
+            props.setStartError(true);
+        } else if (startValue >= props.maxValue) {
+            props.setStartError(true);
         } else {
-            props.setError(false);
-            props.setStartValue(value);
+            props.setStartError(false);
+            props.setStartValue(startValue);
             setIsEdited(true);
         }
     }
@@ -38,38 +51,44 @@ const Settings:FC<SettingsPropsType> = (props) => {
        const value = parseInt(e.currentTarget.value);
 
         if (value < 0) {
-            props.setError(true);
+            props.setMaxError(true);
         } else if (value <= props.startValue) {
-            props.setError(true);
+            props.setMaxError(true);
         } else {
-            props.setError(false);
+            props.setMaxError(false);
             props.setMaxValue(value);
             setIsEdited(true);
         }
     };
 
 
+
+
     const onSetClickHandler = () => {
         props.setCount(props.startValue)
+        localStorage.setItem('startValue', props.startValue.toString());
+        localStorage.setItem('maxValue', props.maxValue.toString());
         props.setIsSet(true)
         setIsEdited(false);
+
     }
 
 
+    const startValueInputClass =  props.startError ? 'inputStartValue-error' : 'inputStartValue';
+    const maxValueInputClass =  props.maxError ? 'inputStartValue-error' : 'inputStartValue';
 
-    const disabledSet = props.error || !isEdited
-
+    const disabledSet = (props.maxError || props.startError) || !isEdited
 
     return (
         <div className={"Settings"}>
             <div className={"Settings-display"}>
-                <div className={props.error ?'Settings-title-error' : 'Settings-title' }>
+                <div className={'Settings-title' }>
                     <h1>max value:</h1>
-                    <input type="number"value={props.maxValue}onChange={onChangeMaxValue}/>
+                    <input  className={maxValueInputClass} type="number" value={props.maxValue} onChange={onChangeMaxValue}/>
                 </div>
-                <div className={ props.error ?'Settings-title-error' : 'Settings-title'}>
+                <div className={'Settings-title'}>
                     <h1>start value:</h1>
-                    <input type="number" value={props.startValue} onChange={onChangeStartValue}/>
+                    <input className={startValueInputClass} type="number" value={props.startValue} onChange={onChangeStartValue}/>
                 </div>
             </div>
             <div className={"Settings-btns"}>

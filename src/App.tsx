@@ -8,7 +8,8 @@ function App() {
     const [count, setCount] = useState(0)
     const [startValue, setStartValue] = useState(0)
     const [maxValue, setMaxValue] = useState(5)
-    const [error, setError] = useState(false)
+    const [startError, setStartError] = useState(false)
+    const [maxError, setMaxError] = useState(false)
     const [isSet, setIsSet] = useState(false)
 
 
@@ -19,19 +20,22 @@ function App() {
                 setStartValue={setStartValue}
                 maxValue={maxValue}
                 setMaxValue={setMaxValue}
-                setError={setError}
+                setStartError={setStartError}
                 setCount={setCount}
                 count={count}
                 setIsSet={setIsSet}
-                error={error}/>
+                startError={startError}
+            maxError={maxError}
+            setMaxError={setMaxError}/>
             <Counter
                 count={count}
                 setCount={setCount}
-                error={error}
-                setError={setError}
+                startError={startError}
+                setStartError={setStartError}
                 maxValue={maxValue}
                 startValue={startValue}
-                isSet={isSet}/>
+                isSet={isSet}
+                maxError={maxError} />
         </div>
     );
 }
