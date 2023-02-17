@@ -26,14 +26,16 @@ const Counter:FC<CounterPropsType> = (props) => {
 
     }
 
-    const disabledInc = props.error ? true : (props.isSet ? false : true)
+    const disabledInc = props.maxValue === props.count || props.error ? true : (props.isSet ? false : true)
     const disabledRes = props.error ? true : (props.isSet ? false : true)
+    const displayClass = props.count === props.maxValue ? 'Counter-display-red' : 'Counter-Display-Value'
+
 
     return (
         <div className={'Counter'}>
             <div className={'Counter-display'}>
-                {props.error ? <h1 className={"Error"}>Error</h1> :
-                    (props.isSet ? <Display count={props.count}/> : <h1 className={'Counter-display-prompt'}>enter values and press "set"</h1>)}
+                {props.error ? <h1 className={"Error"}>Incorrect value!</h1> :
+                    (props.isSet ? <Display count={props.count} className={displayClass}/> : <h1 className={'Counter-display-prompt'}>enter values and press "set"</h1>)}
             </div>
             <div className={"Counter-btns"}>
                 <SuperButton title={'inc'} disabled={disabledInc} onClick={onClickHandlerIncrement}/>
