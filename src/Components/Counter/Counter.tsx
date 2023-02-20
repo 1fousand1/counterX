@@ -15,7 +15,7 @@ type CounterPropsType={
 
 
 const Counter:FC<CounterPropsType> = (props) => {
-
+////деструктури
     const onClickHandlerIncrement = () => {
         for (let i = props.count; i < props.maxValue ; i++) {
             props.setCount(props.count + 1)
@@ -27,8 +27,8 @@ const Counter:FC<CounterPropsType> = (props) => {
 
     }
 
-    const disabledInc = props.maxValue === props.count || (props.maxError || props.startError) ? true : (props.isSet ? false : true)
-    const disabledRes = (props.maxError || props.startError) ? true : (props.isSet ? false : true)
+    const disabledInc = props.maxValue === props.count || (props.maxError || props.startError) ? true : (!props.isSet )
+    const disabledRes = (props.maxError || props.startError) ? true : (!props.isSet)
     const displayClass = props.count === props.maxValue ? 'Counter-display-red' : 'Counter-Display-Value'
 
 
@@ -36,7 +36,7 @@ const Counter:FC<CounterPropsType> = (props) => {
         <div className={'Counter'}>
             <div className={'Counter-display'}>
                 {(props.maxError || props.startError) ? <h1 className={"Error"}> Incorrect value!</h1> :
-                    (props.isSet ? <Display count={props.count} className={displayClass}/> : <h1 className={'Counter-display-prompt'}>enter values and press "set"</h1>)}
+                    (props.isSet ? <Display count={props.count} className={displayClass} /> : <h1 className={'Counter-display-prompt'}>enter values and press "set"</h1>)}
             </div>
             <div className={"Counter-btns"}>
                 <SuperButton title={'inc'} disabled={disabledInc} onClick={onClickHandlerIncrement}/>

@@ -22,7 +22,6 @@ type SettingsPropsType={
 const Settings:FC<SettingsPropsType> = (props) => {
     const [isEdited, setIsEdited] = useState(false);
 
-
     useEffect(() => {
         const savedStartValue = localStorage.getItem('startValue');
         const savedMaxValue = localStorage.getItem('maxValue');
@@ -35,33 +34,33 @@ const Settings:FC<SettingsPropsType> = (props) => {
 
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const startValue = parseInt(e.currentTarget.value);
-
-        if (startValue < 0) {
+        if (!props.startError) {
+            props.setStartValue(startValue);
+        }
+        if (startValue < 0) {///
             props.setStartError(true);
-        } else if (startValue >= props.maxValue) {
+        } else if (startValue >= props.maxValue) {///40-43
             props.setStartError(true);
         } else {
             props.setStartError(false);
-            props.setStartValue(startValue);
             setIsEdited(true);
         }
-    }
+    } ///логику можно в отдельную функцию ///чтобы возможно было написать тест
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
-       const value = parseInt(e.currentTarget.value);
-
-        if (value < 0) {
+       const maxValue = parseInt(e.currentTarget.value);
+        if (!props.maxError){
+            props.setMaxValue(maxValue);
+        }
+        if (maxValue < 0) {
             props.setMaxError(true);
-        } else if (value <= props.startValue) {
+        } else if (maxValue<= props.startValue) {
             props.setMaxError(true);
         } else {
             props.setMaxError(false);
-            props.setMaxValue(value);
             setIsEdited(true);
         }
     };
-
-
 
 
     const onSetClickHandler = () => {
@@ -73,9 +72,8 @@ const Settings:FC<SettingsPropsType> = (props) => {
 
     }
 
-
     const startValueInputClass =  props.startError ? 'inputStartValue-error' : 'inputStartValue';
-    const maxValueInputClass =  props.maxError ? 'inputStartValue-error' : 'inputStartValue';
+    const maxValueInputClass =  props.maxError ? 'inputMaxValue-error' : 'inputMaxValue';
 
     const disabledSet = (props.maxError || props.startError) || !isEdited
 
