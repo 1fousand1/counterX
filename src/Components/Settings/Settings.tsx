@@ -34,14 +34,10 @@ const Settings:FC<SettingsPropsType> = (props) => {
 
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const startValue = parseInt(e.currentTarget.value);
-        if (!props.startError) {
-            props.setStartValue(startValue);
-        }
-        if (startValue < 0) {///
-            props.setStartError(true);
-        } else if (startValue >= props.maxValue) {///40-43
+        if (startValue < 0 || startValue >= props.maxValue) {///
             props.setStartError(true);
         } else {
+            props.setStartValue(startValue)
             props.setStartError(false);
             setIsEdited(true);
         }
@@ -49,14 +45,10 @@ const Settings:FC<SettingsPropsType> = (props) => {
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
        const maxValue = parseInt(e.currentTarget.value);
-        if (!props.maxError){
-            props.setMaxValue(maxValue);
-        }
-        if (maxValue < 0) {
-            props.setMaxError(true);
-        } else if (maxValue<= props.startValue) {
+        if (maxValue < 0 || maxValue <= props.startValue ) {
             props.setMaxError(true);
         } else {
+            props.setMaxValue(maxValue);
             props.setMaxError(false);
             setIsEdited(true);
         }
