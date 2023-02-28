@@ -14,8 +14,9 @@ type CounterPropsType={
 }
 
 
-const Counter:FC<CounterPropsType> = (props) => {
-////деструктури
+const Counter:React.FC<CounterPropsType> = (props) => {
+////деструктуризация
+
     const onClickHandlerIncrement = () => {
         for (let i = props.count; i < props.maxValue ; i++) {
             props.setCount(props.count + 1)

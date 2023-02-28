@@ -34,25 +34,30 @@ const Settings:FC<SettingsPropsType> = (props) => {
 
     const onChangeStartValue = (e: ChangeEvent<HTMLInputElement>) => {
         const startValue = parseInt(e.currentTarget.value);
+        if (isNaN(startValue)) {
+            props.setStartValue(props.startValue)
+            return
+        }
         if (!props.startError) {
             props.setStartValue(startValue);
         }
-        if (startValue < 0) {///
+
+        if (startValue < 0) {
             props.setStartError(true);
-        } else if (startValue >= props.maxValue) {///40-43
+        } else if (startValue >= props.maxValue) {
             props.setStartError(true);
         } else {
             props.setStartError(false);
             setIsEdited(true);
         }
-    } ///логику можно в отдельную функцию ///чтобы возможно было написать тест
+    }
+    ///логику можно в отдельную функцию, чтобы возможно было написать тест
 
     const onChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
        const maxValue = parseInt(e.currentTarget.value);
-        if (!props.maxError){
+        if (!props.maxError) {
             props.setMaxValue(maxValue);
-        }
-        if (maxValue < 0) {
+        } else if (maxValue < 0) {
             props.setMaxError(true);
         } else if (maxValue<= props.startValue) {
             props.setMaxError(true);
@@ -62,14 +67,12 @@ const Settings:FC<SettingsPropsType> = (props) => {
         }
     };
 
-
     const onSetClickHandler = () => {
         props.setCount(props.startValue)
         localStorage.setItem('startValue', props.startValue.toString());
         localStorage.setItem('maxValue', props.maxValue.toString());
         props.setIsSet(true)
         setIsEdited(false);
-
     }
 
     const startValueInputClass =  props.startError ? 'inputStartValue-error' : 'inputStartValue';
